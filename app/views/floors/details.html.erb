@@ -1,0 +1,122 @@
+<% floor_id = params[:id].to_i%>
+<% floor = Floor.find_by(id: floor_id) %>
+
+<% if session["user_id"] == nil %>
+  <div class="row justify-content-center">
+    <h4>Note: Sign in/Sign up to see availability, and add/edit outlets and bathrooms.</h4>
+  </div>
+  
+  <div class="row justify-content-center">
+    <h3>Outlets on <%=floor.level%></h3>
+  </div>
+
+  <div class="row justify-content-center">
+    <% for outlet in Outlet.all%>
+        
+        <%if floor_id==outlet.floor_id%>
+        <div class="col-sm-2 m-4 text-center">
+        <img src="https://image.freepik.com/free-icon/electric-plugins-of-wall_318-63199.jpg" class="img-fluid">
+        <p></p>
+        <p><strong>Outlet ID: <%=outlet.id%></strong></p>
+        <p>Location: <%=outlet.location%></p>
+        <p>Number of outlets: <%=outlet.numoutlets%></p>
+        
+               </div>
+        <%end%>
+    <%end%>
+    
+</div>
+
+<div class="row justify-content-center">
+    <h3>Bathrooms on <%=floor.level%></h3>
+</div>
+<div class="row justify-content-center">
+    <% for bathroom in Bathroom.all%>
+        
+        <%if floor_id==bathroom.floor_id%>
+        <div class="col-sm-2 m-4 text-center">
+        <img src="http://livablemht.org/wp-content/uploads/2017/12/bathroom-icon-bathroom-symbol-vector-free-bathroom-icon-font-awesome.jpg" class="img-fluid">
+        <p></p>
+        <p><strong>Bathroom ID: <%=bathroom.id%></strong></p>
+        <p>Location: <%=bathroom.location%></p>
+        <p>Gender: <%=bathroom.gender%></p>
+        <%if bathroom.gender=="Men"%>
+        <p>Number of urinals: <%=bathroom.numurinals%></p>
+        <%end%>
+        <p>Number of stalls: <%=bathroom.numstalls%></p>
+        
+          </div>
+        <%end%>
+    <%end%>
+    
+</div>
+
+<%else%>
+<div class="row justify-content-center">
+    <h3>Outlets on <%=floor.level%></h3>
+</div>
+
+<div class="row justify-content-center">
+    <% for outlet in Outlet.all%>
+        
+        <%if floor_id==outlet.floor_id%>
+        <div class="col-sm-2 m-4 text-center">
+        <img src="https://image.freepik.com/free-icon/electric-plugins-of-wall_318-63199.jpg" class="img-fluid">
+        <p></p>
+        <p><strong>Outlet ID: <%=outlet.id%></strong></p>
+        <p>Location: <%=outlet.location%></p>
+        <p>Number of outlets: <%=outlet.numoutlets%></p>
+        <p>Available slots: <%=outlet.availslots%></p>
+        
+        <a href="/outlets/<%= outlet.id %>/delete" class="text-center">
+          <i class="fas fa-trash"></i>
+          Delete &nbsp &nbsp &nbsp
+        </a>
+        
+        <a href="/outlets/<%= outlet.id %>/edit" class="pr-5 text-center">
+        <i class="fas fa-pen-square"></i>
+          Edit
+        </a>
+        
+        </div>
+        <%end%>
+    <%end%>
+    
+</div>
+
+<div class="row justify-content-center">
+    <h3>Bathrooms on <%=floor.level%></h3>
+</div>
+<div class="row justify-content-center">
+    <% for bathroom in Bathroom.all%>
+        
+        <%if floor_id==bathroom.floor_id%>
+        <div class="col-sm-2 m-4 text-center">
+        <img src="http://livablemht.org/wp-content/uploads/2017/12/bathroom-icon-bathroom-symbol-vector-free-bathroom-icon-font-awesome.jpg" class="img-fluid">
+        <p></p>
+        <p><strong>Bathroom ID: <%=bathroom.id%></strong></p>
+        <p>Location: <%=bathroom.location%></p>
+        <p>Gender: <%=bathroom.gender%></p>
+        <%if bathroom.gender=="Men"%>
+        <p>Number of urinals: <%=bathroom.numurinals%></p>
+        <p>Number of urinals available: <%=bathroom.availurinals%></p>
+        <%end%>
+        <p>Number of stalls: <%=bathroom.numstalls%></p>
+        <p>Number of stalls available: <%=outlet.availslots%></p>
+        
+        <a href="/bathrooms/<%= bathroom.id %>/delete" class="text-center">
+            <i class="fas fa-trash"></i>
+            Delete &nbsp &nbsp &nbsp
+            </a>
+        
+            <a href="/bathrooms/<%= bathroom.id %>/edit" class="pr-5 text-center">
+            <i class="fas fa-pen-square"></i>
+            Edit
+            </a>
+        
+          </div>
+        <%end%>
+    <%end%>
+    
+</div>
+<%end%>

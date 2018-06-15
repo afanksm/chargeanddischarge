@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h3>Admin finally built more bathrooms? Or did you discover a secret bathroom hiding somewhere? Add them here!</h3>
+  </div>
+</div>
+<p></p>
+<form action="/bathrooms/create" class="col-sm-4">
+    
+    <p class="form-group">Floor: 
+    
+      <select name="floor_id">
+        
+        <% for floor in Floor.all %>
+          <option value="<%= floor.id %>">
+            <%= floor.level %>
+          </option>
+        <% end %>
+        
+      </select>
+    </p>
+
+    <p class="form-group">Location: <input autofocus class="form-control" type="text" name="location" placeholder="Enter text" required></p>
+ 
+    <p class="form-group">Gender: 
+    
+      <select name="gender">
+          <option value="Women">
+            Women
+          </option>
+          <option value="Men">
+            Men
+          </option>
+      </select>
+      </p>
+      
+    <p class="form-group">Number of Stalls: <input class="form-control" type="number" min="0" name="numstalls" placeholder="Enter integer" required></p>
+    
+    <p class="form-group">Number of stalls available: <input class="form-control" type="number" min="0" name="availstalls" placeholder="Enter integer" required></p>
+    
+    <p class="form-group">Number of urinals: <input class="form-control" type="number" min="0" name="numurinals" placeholder="Enter integer, 0 if women" required ></p>
+    
+    <p class="form-group">Number of urinals available: <input class="form-control" type="number" min="0" name="availurinals" placeholder="Enter integer, 0 if women" required></p>
+    
+    <button class="btn btn-primary">Add Bathroom</button>
+    or
+    <a href="/">Cancel</a>
+
+</form>

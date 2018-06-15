@@ -1,0 +1,56 @@
+<% if session["user_id"] == nil %>
+  <div class="row justify-content-center">
+    <h4>Note: Sign in/Sign up to see availability, and add/edit outlets and bathrooms.</h4>
+  </div>
+  
+  <div class="row justify-content-center">
+    <h3>All Outlets in Glub</h3>
+    </div>
+
+  <div class="row justify-content-center">
+    <% for outlet in Outlet.all%>
+        <div class="col-sm-3 m-4 text-center">
+        <img src="https://image.freepik.com/free-icon/electric-plugins-of-wall_318-63199.jpg" class="img-fluid">
+        <p></p>
+        <p><strong>Outlet ID: <%=outlet.id%></strong></p>
+        <% floor=Floor.find_by(id: outlet.floor_id)%>
+        <p>Floor: <%=floor.level%></p>
+        <p>Location: <%=outlet.location%></p>
+        <p>Number of outlets: <%=outlet.numoutlets%></p>
+        
+    </div>
+    <%end%>
+</div>
+ 
+
+<%else%>
+<div class="row justify-content-center">
+    <h3>All Outlets in Glub</h3>
+</div>
+
+<div class="row justify-content-center">
+    <% for outlet in Outlet.all%>
+        <div class="col-sm-3 m-4 text-center">
+        <img src="https://image.freepik.com/free-icon/electric-plugins-of-wall_318-63199.jpg" class="img-fluid">
+        <p></p>
+        <p><strong>Outlet ID: <%=outlet.id%></strong></p>
+        <% floor=Floor.find_by(id: outlet.floor_id)%>
+        <p>Floor: <%=floor.level%></p>
+        <p>Location: <%=outlet.location%></p>
+        <p>Number of outlets: <%=outlet.numoutlets%></p>
+        <p>Available slots: <%=outlet.availslots%></p>
+        
+        <a href="/outlets/<%= outlet.id %>/delete" class="text-center">
+          <i class="fas fa-trash"></i>
+          Delete &nbsp &nbsp &nbsp
+        </a>
+        
+        <a href="/outlets/<%= outlet.id %>/edit" class="pr-5 text-center">
+        <i class="fas fa-pen-square"></i>
+          Edit
+        </a>
+        </div>
+    <%end%>
+    
+</div>
+<%end%>

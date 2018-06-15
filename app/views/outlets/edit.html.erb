@@ -1,0 +1,34 @@
+<% outlet = Outlet.find_by(id: params["id"]) %>
+
+<h1>Editing Outlet #<%= outlet.id %></h1>
+
+<form action="/outlets/<%=outlet.id%>/update" class='col-sm-5'>
+
+  <p class="form-group">Floor: 
+    
+      <select name="floor_id">
+          <option value="<%= outlet.floor_id %>">
+            <%= Floor.find_by(id: outlet.floor_id).level %>
+          </option>
+          
+        <% for floor in Floor.all %>
+            <%if floor.id!= outlet.floor_id%>
+              <option value="<%= floor.id %>">
+                <%= floor.level %>
+              </option>
+            <%end%>
+        <% end %>
+        
+      </select>
+    
+    </p>
+
+    <p class="form-group">Location: <input value= "<%=outlet.location %>" autofocus class="form-control" name="location"></p>
+    
+    <p class="form-group">Number of Outlets: <input value= "<%=outlet.numoutlets%>" autofocus class="form-control" type="number" min="0" name="numoutlets"></p>
+    
+    <p class="form-group">Number of slots available: <input value= "<%=outlet.availslots%>" autofocus class="form-control" type="number" min="0" name="availslots"></p>
+
+  <button class="btn btn-primary">Update Outlet</button>
+
+</form>

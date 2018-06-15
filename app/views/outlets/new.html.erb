@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h3>Found some new outlets? Add them here!</h3>
+  </div>
+</div>
+
+<form action="/outlets/create" class="col-sm-4">
+    
+    <p class="form-group">Floor: 
+    
+      <select name="floor_id">
+        
+        <% for floor in Floor.all %>
+          <option value="<%= floor.id %>">
+            <%= floor.level %>
+          </option>
+        <% end %>
+        
+      </select>
+    
+    </p>
+
+    <p class="form-group">Location: <input autofocus class="form-control" name="location" placeholder="Enter text" required></p>
+
+    <p class="form-group">Number of Outlets: <input class="form-control" name="numoutlets" type="number" min="0" placeholder="Enter integer" required></p>
+    
+    <p class="form-group">Number of slots available: <input class="form-control" name="availslots" type="number" min="0" placeholder="Enter integer" required></p>
+
+    
+
+
+    <button class="btn btn-primary">Add Outlet(s)</button>
+    or
+    <a href="/">Cancel</a>
+
+</form>

@@ -1,0 +1,65 @@
+<% bathroom = Bathroom.find_by(id: params["id"]) %>
+
+<h1>Editing Bathroom #<%= bathroom.id %></h1>
+
+<form action="/bathrooms/<%=bathroom.id%>/update" class='col-sm-5'>
+
+  <p class="form-group">Floor: 
+    
+      <select name="floor_id">
+          <option value="<%= bathroom.floor_id %>">
+            <%= Floor.find_by(id: bathroom.floor_id).level %>
+          </option>
+          
+        <% for floor in Floor.all %>
+            <%if floor.id!= bathroom.floor_id%>
+              <option value="<%= floor.id %>">
+                <%= floor.level %>
+              </option>
+            <%end%>
+        <% end %>
+        
+      </select>
+    
+    </p>
+
+
+    <p class="form-group">Location: <input value = "<%=bathroom.location%>" autofocus class="form-control" name="location"></p>
+    
+    <p class="form-group">Gender: 
+    
+      <% if bathroom.gender=="Women"%>
+        <select name="gender">
+          <option value="Women">
+            Women
+          </option>
+          <option value="Men">
+            Men
+          </option>
+      </select>
+      <%end%>
+      
+      <% if bathroom.gender=="Men"%>
+        <select name="gender">
+          <option value="Men">
+            Men
+          </option>
+          <option value="Women">
+            Women
+          </option>
+      </select>
+      <%end%>
+      
+      </p>
+      
+    <p class="form-group">Number of Stalls: <input value ="<%=bathroom.numstalls%>" autofocus class="form-control" type="number" min="0" name="numstalls"></p>
+    
+    <p class="form-group">Number of stalls available: <input value ="<%=bathroom.availstalls%>" autofocusclass="form-control" type="number" min="0" name="availstalls"></p>
+    
+    <p class="form-group">Number of urinals: <input value ="<%=bathroom.numurinals%>" autofocusclass="form-control" type="number" min="0" name="numurinals"></p>
+    
+    <p class="form-group">Number of urinals available: <input value ="<%=bathroom.availurinals%>" autofocus class="form-control" type="number" min="0"name="availurinals"></p>
+
+  <button class="btn btn-primary">Update Bathroom</button>
+
+</form>

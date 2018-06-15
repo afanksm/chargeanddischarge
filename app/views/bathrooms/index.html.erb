@@ -1,0 +1,108 @@
+<% if session["user_id"] == nil %>
+  <div class="row justify-content-center">
+    <h4>Note: Sign in/Sign up to see availability, and add/edit outlets and bathrooms.</h4>
+  </div>
+  
+  <div class="row justify-content-center">
+    <% for bathroom in Bathroom.all%>
+        <%if bathroom.gender=="Men"%>
+          <div class="col-sm-2 m-4 text-center">
+            <i class="fas fa-male fa-10x"></i>
+            <p></p>
+            <p><strong>Bathroom ID: <%=bathroom.id%></strong></p>
+            <% floor=Floor.find_by(id: bathroom.floor_id)%>
+            <p>Floor: <%=floor.level%></p>
+            <p>Location: <%=bathroom.location%></strong></p>
+            <p>Gender: <%=bathroom.gender%></p>
+            <p>Number of urinals: <%=bathroom.numurinals%></p>
+            <p>Number of stalls: <%=bathroom.numstalls%></p>
+        
+          </div>
+        <%end%>
+      <%end%>
+  </div>
+  
+  <div class="row justify-content-center">
+      <% for bathroom in Bathroom.all%>
+          <%if bathroom.gender=="Women"%>
+          <div class="col-sm-2 m-4 text-center">
+            <i class="fas fa-female fa-10x"></i>
+            <p></p>
+            <p><strong>Bathroom ID: <%=bathroom.id%></strong></p>
+            <% floor=Floor.find_by(id: bathroom.floor_id)%>
+            <p>Floor: <%=floor.level%></p>
+            <p>Location: <%=bathroom.location%></strong></p>
+            <p>Gender: <%=bathroom.gender%></p>
+            <p>Number of stalls: <%=bathroom.numstalls%></p>
+            
+          </div>
+        <%end%>
+    <%end%>
+</div>
+  
+
+<%else%>
+<div class="row justify-content-center">
+    <h3>All bathrooms in the Glub</h3>
+   
+</div>
+<div class="row justify-content-center">
+    <% for bathroom in Bathroom.all%>
+        <%if bathroom.gender=="Men"%>
+          <div class="col-sm-2 m-4 text-center">
+            <i class="fas fa-male fa-10x"></i>
+            <p></p>
+            <p><strong>Bathroom ID: <%=bathroom.id%></strong></p>
+            <% floor=Floor.find_by(id: bathroom.floor_id)%>
+            <p>Floor: <%=floor.level%></p>
+            <p>Location: <%=bathroom.location%></strong></p>
+            <p>Gender: <%=bathroom.gender%></p>
+            <p>Number of urinals: <%=bathroom.numurinals%></p>
+            <p>Number of urinals available: <%=bathroom.availurinals%></p>
+            <p>Number of stalls: <%=bathroom.numstalls%></p>
+            <p>Number of stalls available: <%=bathroom.availstalls%></p>
+            
+            <a href="/bathrooms/<%= bathroom.id %>/delete" class="text-center">
+            <i class="fas fa-trash"></i>
+            Delete &nbsp &nbsp &nbsp
+            </a>
+        
+            <a href="/bathrooms/<%= bathroom.id %>/edit" class="pr-5 text-center">
+            <i class="fas fa-pen-square"></i>
+            Edit
+            </a>
+        
+          </div>
+        <%end%>
+      <%end%>
+  </div>
+  
+  <div class="row justify-content-center">
+      <% for bathroom in Bathroom.all%>
+          <%if bathroom.gender=="Women"%>
+          <div class="col-sm-2 m-4 text-center">
+            <i class="fas fa-female fa-10x"></i>
+            <p></p>
+            <p><strong>Bathroom ID: <%=bathroom.id%></strong></p>
+            <% floor=Floor.find_by(id: bathroom.floor_id)%>
+            <p>Floor: <%=floor.level%></p>
+            <p>Location: <%=bathroom.location%></strong></p>
+            <p>Gender: <%=bathroom.gender%></p>
+            <p>Number of stalls: <%=bathroom.numstalls%></p>
+            <p>Number of stalls available: <%=bathroom.availstalls%></p>
+            
+            <a href="/bathrooms/<%= bathroom.id %>/delete" class="text-center">
+            <i class="fas fa-trash"></i>
+            Delete &nbsp &nbsp &nbsp
+            </a>
+        
+            <a href="/bathrooms/<%= bathroom.id %>/edit" class="pr-5 text-center">
+            <i class="fas fa-pen-square"></i>
+            Edit
+            </a>
+          </div>
+        <%end%>
+    <%end%>
+</div>
+
+<%end%>

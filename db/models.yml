@@ -1,3 +1,32 @@
+User
+  name: text
+  email: text
+  password_digest: text
+
+Floor
+  level: text
+  totalnumoutlets: integer
+  totalavailslots: integer
+  totalnumbath: integer
+  totalavailbath: integer
+ 
+Outlet
+  floor_id: integer
+  location: text
+  numoutlets: integer
+  availslots: integer
+  
+Bathroom
+  floor_id: integer
+  location: text
+  gender: text
+  numstalls: integer
+  numurinals: integer
+  availstalls: integer
+  availurinals: integer
+
+
+
 # Example:
 #
 # Book

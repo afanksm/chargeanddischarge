@@ -1,0 +1,86 @@
+<% if session["user_id"] == nil %>
+  <div class="row justify-content-center">
+    <h4>Note: Sign in/Sign up to see availability, and add/edit outlets and bathrooms.</h4>
+  </div>
+<div class="row justify-content-center">
+    <% for floor in Floor.all %>
+  
+    <%totalnumoutlets=0%>
+    <%totalavailslots=0%>
+      <%for outlets in Outlet.all%>
+        <% if outlets.floor_id==floor.id%>
+        <%totalnumoutlets=totalnumoutlets+outlets.numoutlets%>
+        <%totalavailslots=totalavailslots+outlets.availslots%>
+        <%end%>
+      <%end%>
+      
+    <%totalnumbath=0%>
+    <%totalavailbath=0%>
+      <%for bathrooms in Bathroom.all%>
+        <% if bathrooms.floor_id==floor.id%>
+        <%totalnumbath=totalnumbath+1%>
+          <%if bathrooms.availstalls!=0 or bathrooms.availurinals!=0%>
+          <%totalavailbath=totalavailbath+1%>
+          <%end%>
+        <%end%>
+      <%end%>
+    
+
+      <div class="col-sm-2 m-4 text-center">
+        <center><strong><h2><a href="/floors/<%=floor.id%>"><%=floor.level%></a> </h2></center></strong>
+        <img src="https://image.freepik.com/free-icon/electric-plugins-of-wall_318-63199.jpg" class="img-fluid">
+        <p></p><h6>Total number of outlets: <%=totalnumoutlets%></h6>
+        
+        <img src="http://livablemht.org/wp-content/uploads/2017/12/bathroom-icon-bathroom-symbol-vector-free-bathroom-icon-font-awesome.jpg" class="img-fluid">
+        <h6>Total number of bathrooms: <%=totalnumbath%></h6>
+         </div>
+
+    <% end %>
+
+</div>
+
+<%else%>
+<div class="row justify-content-center">
+  
+
+
+    <% for floor in Floor.all %>
+  
+    <%totalnumoutlets=0%>
+    <%totalavailslots=0%>
+      <%for outlets in Outlet.all%>
+        <% if outlets.floor_id==floor.id%>
+        <%totalnumoutlets=totalnumoutlets+outlets.numoutlets%>
+        <%totalavailslots=totalavailslots+outlets.availslots%>
+        <%end%>
+      <%end%>
+      
+    <%totalnumbath=0%>
+    <%totalavailbath=0%>
+      <%for bathrooms in Bathroom.all%>
+        <% if bathrooms.floor_id==floor.id%>
+        <%totalnumbath=totalnumbath+1%>
+          <%if bathrooms.availstalls!=0 or bathrooms.availurinals!=0%>
+          <%totalavailbath=totalavailbath+1%>
+          <%end%>
+        <%end%>
+      <%end%>
+    
+
+      <div class="col-sm-2 m-4 text-center">
+        <center><strong><h2><a href="/floors/<%=floor.id%>"><%=floor.level%></a> </h2></center></strong>
+        <img src="https://image.freepik.com/free-icon/electric-plugins-of-wall_318-63199.jpg" class="img-fluid">
+        <p></p><h6>Total number of outlets: <%=totalnumoutlets%></h6>
+        <h6>Total available outlet slots: <%=totalavailslots%></h6>
+        
+        <img src="http://livablemht.org/wp-content/uploads/2017/12/bathroom-icon-bathroom-symbol-vector-free-bathroom-icon-font-awesome.jpg" class="img-fluid">
+        <h6>Total number of bathrooms: <%=totalnumbath%></h6>
+        <h6>Total bathrooms not full: <%=totalavailbath%></h6>
+        
+        
+         </div>
+
+    <% end %>
+
+</div>
+<%end%>
