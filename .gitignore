@@ -17,4 +17,7 @@
 !/log/.keep
 !/tmp/.keep
 
+# Ignore secrets
+secrets.yml
+
 .byebug_history
